@@ -1,0 +1,15 @@
+Sinyal input:
+Fs = 1000; % Frekuensi sampel
+t = 0:1/Fs:(length(ekg_data)-1)/Fs; % Waktu
+Bangkitkan sinyal dalam rentang frekuensi 
+f = 1; % Frekuensi sinyal (Hz)
+sinyal_frekuensi = sin(2*pi*f*t);
+
+
+Tambahkan noise gaussian
+SNR = 10; % Signal-to-Noise Ratio
+noise = randn(size(ekg_data));
+noise = noise / norm(noise); % Normalisasi amplitudo noise
+noise_power = var(ekg_data) / (10^(SNR/10));
+noise = sqrt(noise_power) * noise;
+sinyal_input = sinyal_frekuensi + noise;
